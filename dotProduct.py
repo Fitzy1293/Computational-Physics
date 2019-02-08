@@ -12,7 +12,7 @@ while True:
 
 vectorV = []
 while True:
-    v = input('Enter vector v\'s components, or enter \'Calculate\' to calculate the dot product.\n')
+    v = input('Enter vector v\'s component, or enter \'Calculate\' to calculate their dot product.\n')
     if v.lower() == 'calculate':
         print()
         break
