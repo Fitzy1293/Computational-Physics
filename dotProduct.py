@@ -37,6 +37,6 @@ else:
     if dotProduct == 0:
         print('These vectors are orthogonal, their dot product is 0.')
     else:
-        print('These vectors are not orthogonal, their dotProduct is ' + str(dotProduct) + '.')
+        print('These vectors are not orthogonal, their dot product is ' + str(dotProduct) + '.')
         
 
