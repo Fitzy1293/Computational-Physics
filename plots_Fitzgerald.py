@@ -1,6 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+#Interpolation - the insertion of an intermediate value or term into a series by estimating or calculating it from surrounding known values.
+#(Google dictionary)
+#Basically a mathematical estimate based on data. 
+
 def interpolate(xi, xComponents, yComponents):
     x = xComponents
     y = yComponents
@@ -27,13 +31,13 @@ xi = int(input('Enter an x value to interpolate at  >> '))
 #Checked with >> x^2 - 6x + 9, Ordered pairs: [(1,4), (2,1), (4,1)], xi = 5.
 #Returns 4.0, which is correct (5)^2 - 6(5) + 9 = 4
 userInterpolate = interpolate(xi, xComponents, yComponents)
-print(userInterpolate)
+print('Interpolation based on data input => ' + str(userInterpolate))
 print()
 
 
 #Range of x values. 
 xMin = int(input('Enter the lowest x value you want to interpolate from >> '))
-xMax = int(input('Enter the lowest x value you want to interpolate from >> '))
+xMax = int(input('Enter the max x value you want to interpolate to >> '))
 xr = np.array([xMin,xMax])
 
 nplot = 100
