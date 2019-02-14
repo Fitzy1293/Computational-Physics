@@ -15,7 +15,7 @@ def interpolate(xi, xComponents, yComponents):
 
     return yi
 
-print('You will type in (x, y) pairs to interpolate data using Lagrange polynomials.')
+print('You will enter three (x, y) pairs to interpolate data using Lagrange polynomials.')
 xyPairs = []
 for i in range(3):
     xComponent = input('Enter the value of x >> ')
