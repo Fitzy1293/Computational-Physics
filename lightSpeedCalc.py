@@ -3,11 +3,11 @@ from math import sqrt
 import numpy as np
 
 #Measurements from class.
-#(Distance, time) in meters and second. 
+#(Distance, time) in meters and seconds. 
 measurements = [(3.316, 12 * 10**-9),
-                    (3.096, 10 * 10**-9),
-                    (3.506, 11 * 10**-9),
-                    (3.304, 11 * 10**-9)] 
+                (3.096, 10 * 10**-9),
+                (3.506, 11 * 10**-9),
+                (3.304, 11 * 10**-9)] 
 
 #Uncertainty from measurements. 
 dUncertainty = 10**-3
@@ -44,3 +44,5 @@ print('{:.1e}'.format(c))
 print()
 print('Final uncertainty calculation:')
 print('{:.0e}'.format(cUncertainty))
+
+
