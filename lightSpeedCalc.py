@@ -3,7 +3,7 @@ from math import sqrt
 import numpy as np
 
 #Measurements from class.
-#(Distance, time) in meters and seconds. 
+#(Distance, time) in meters and second. 
 measurements = [(3.316, 12 * 10**-9),
                     (3.096, 10 * 10**-9),
                     (3.506, 11 * 10**-9),
@@ -22,7 +22,7 @@ for measurement in measurements:
     c = d/t
     cValues.append(c)
 
-    cUncertainty =  sqrt(dUncertainty**2 + ((d *  tUncertainty) / t )**2) / t
+    cUncertainty =  t ** -1 * sqrt(dUncertainty**2 + ((d *  tUncertainty) / t )**2) 
     cUncertainties.append(cUncertainty)
 
 print('Speed of light values from measurements: ')
