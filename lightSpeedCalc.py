@@ -21,9 +21,8 @@ for measurement in measurements:
     t = measurement[1]
     c = d/t
     cValues.append(c)
-    
 
-    cUncertainty = t**-1 * sqrt(dUncertainty**2 + ((d *  tUncertainty) / t )**2)
+    cUncertainty =  sqrt(dUncertainty**2 + ((d *  tUncertainty) / t )**2) / t
     cUncertainties.append(cUncertainty)
 
 print('Speed of light values from measurements: ')
@@ -45,5 +44,3 @@ print('{:.1e}'.format(c))
 print()
 print('Final uncertainty calculation:')
 print('{:.0e}'.format(cUncertainty))
-
-
