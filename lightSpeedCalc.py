@@ -3,7 +3,7 @@ from math import sqrt
 import numpy as np
 
 #Measurements from class.
-#(Distance, time) in meters and second. 
+#(Distance, time) in meters and seconds. 
 measurements = [(3.316, 12 * 10**-9),
                     (3.096, 10 * 10**-9),
                     (3.506, 11 * 10**-9),
