@@ -10,7 +10,6 @@ Bugs:    If tau is too small you get an error.
 import numpy as np
 import matplotlib.pyplot as plt
 from pprint import pprint
-import warnings
 from copy import deepcopy
 
 def main():
