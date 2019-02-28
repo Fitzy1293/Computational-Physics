@@ -1,8 +1,10 @@
 """
 Author:  Owen Fitzgerald
 Purpose: Projectile motion calculation and graphing.
-         with and without air resistance.
+         With air resistance from Euler's method and without air resistance.
          Now has lagrange interpolation.
+
+Bugs:    If tau is too small you get an error.
 """
 
 import numpy as np
@@ -73,19 +75,21 @@ def main():
             break
 
     print('Maximum range is', r[0], 'meters')
-    print('Time of flight is', laststep*tau , ' seconds')
+    print('Time of flight is', laststep*tau , ' seconds') 
 
     #* Graph the trajectory of the baseball
     # Mark the location of the ground by a straight line
     xground = np.array([0., xNoAir[laststep-1]])
     yground = np.array([0., 0.])
     
-    xinterpValues = interpolateNoAir(xNoAir, yNoAir)[0] #x and y lists from interpolateNoAir
-    yinterpValues = interpolateNoAir(xNoAir, yNoAir)[1]
+    xInterpValues = interpolateNoAir(xNoAir, yNoAir)[0] #x and y lists from interpolated theoretical values
+    yInterpValues = interpolateNoAir(xNoAir, yNoAir)[1]
+    
+    print('The corrected time of flight is '+ str((len(xInterpValues)-1) * tau) + ' seconds') #For 3(c)
 
     plt.plot(xplot[0:laststep+1], yplot[0:laststep+1], '+',
              xNoAir[0:laststep], yNoAir[0:laststep], '-',
-             xinterpValues, yinterpValues,'-', #Added lagrange interpolation to plot
+             xInterpValues, yInterpValues,'-', #Added lagrange interpolation to plot
              xground, yground,'r-')
 
     plt.legend(['Euler method', 'Theory (No air)', 'Interpolation']);
@@ -98,13 +102,17 @@ def interpolateNoAir(xNoAir, yNoAir):
     xyList = [deepcopy(xNoAir.tolist()), deepcopy(yNoAir.tolist())] #Deep copy of the numpy arrays
                                                                     #I like working with lists
                                                                     #Can work with the theoretical values
-    xyTuples = [] #List of (x, y) pairs                             #Without worrying about changing original values
+                                                                    #Without worrying about changing original values
+    y0 = yNoAir[0] #For adding to the final list to 
+                   #To start at the correct height
+    
+    xyTuples = [] #List of (x, y) pairs
     for i in range(len(xyList[1])):                                 
         if xyList[1][i] > 0: #Getting rid of theoretical y values less > 0
             xyTuples.append((xyList[0][i], xyList[1][i]))
-    print(xyList)
+    
     xyInterpPair = [xyTuples[-1], xyTuples[-2], xyTuples[-3]] #Gets three (x,y) points for interpolation
-        
+  
     xValues = [xy[0] for xy in xyTuples] #List of x values
                                          
     yInterpValues = [] #y values for interpolation at each x value
@@ -113,11 +121,13 @@ def interpolateNoAir(xNoAir, yNoAir):
         yInterpValues.append(yInterp)
         
     xInterpValues = [x for i, x in enumerate(xValues) if i < len(yInterpValues)] #Only x values that have an interpolated y                                   
-                                                                                 #Means only x values while y is in the air                                                               
+                                                                                 #Means only x values while y is in the air
+    xInterpValues = [0] + xInterpValues #Adds the starting position
+    yInterpValues = [y0] + yInterpValues                                                                  
     xyInterpValues = [xInterpValues, yInterpValues] #Used to plot in main()
     return xyInterpValues
 
-def interpolate(xi,xyInterpPairs): #xyInterpPair is a LIST of (x, y) pairs. 
+def interpolate(xi,xyInterpPairs): #xyInterpPair is a list of (x, y) pairs. 
     x = [xy[0] for xy in xyInterpPairs] #x and y values in separate lists from the tuple
     y = [xy[1] for xy in xyInterpPairs]
 
