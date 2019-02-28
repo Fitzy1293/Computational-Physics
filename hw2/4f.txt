@@ -1,2 +1,2 @@
-The plot of the theoretical and the interpolated values match almost exactly with air resistance.
+The plot of the theoretical and the interpolated values match almost exactly.
 This means that the lagrange interpolation is not good if you have to take into account air resistance. 
