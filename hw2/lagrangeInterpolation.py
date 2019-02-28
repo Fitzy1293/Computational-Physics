@@ -23,7 +23,6 @@ def main():
         yComponent = input('Enter the corresponding value of y >> ')
         xyPairs.append((int(xComponent), int(yComponent)))
 
-    xyPairs = np.array(xyPairs)
     xi = int(input('Enter an x value to interpolate at  >> ')) #Uses this x to calculate yi based on the  
                                                                #Entered ordered pairs
 
