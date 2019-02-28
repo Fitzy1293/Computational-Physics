@@ -1,14 +1,18 @@
 """
 Author:  Owen Fitzgerald
-Purpose: Projectile motion calculation and graphing.
-         with and without air resistance.
-         Now has lagrange interpolation.
+Purpose: Projectile motion calculation and plotting.
+         With and without air resistance.
+         Now with lagrange interpolation.
 
-Bugs:    If tau is too small you get an error.
+         Homework 2, Computational Physics 
+
+Bugs:    If you give use certain strange values to the height it crashes.
+         Tau can't be too small. 
 
 Notes:   I like using list comprehensions more than np arrays. I don't know why.
          I modified the program a little since I took the screenshots for the questions,
          because I ended up obsessing over how best to write the interpolateTheoretical function.
+         It is pretty concise now and I'm happy with it. 
 """
 
 import numpy as np
@@ -102,18 +106,15 @@ def main():
     plt.show()
 
 def interpolateTheoretical(xNoAir, yNoAir):
-    xyTuples = [(xNoAir[i], yNoAir[i]) for i, y in enumerate(yNoAir) if y > 0 and i!= 0] #(x,y) y > 0, except the start
+    xyTuples = [(xNoAir[i], yNoAir[i]) for i, y in enumerate(yNoAir) if y > 0 and i != 0] #(x,y), y > 0 except the start
 
-    xyInterpPairs = [xyTuples[-1], xyTuples[-2], xyTuples[-3]] #Gets three (x,y) points for interpolation  
+    yInterpValues = [interpolate(xy[0], xyTuples[-3:]) for xy in xyTuples] #Interpolates y from theoretical (x,y)
 
-    yInterpValues = [interpolate(xy[0], xyInterpPairs) for xy in xyTuples] #y values for each x
-
-    xInterpValues = [xy[0] for i, xy in enumerate(xyTuples) if i < len(yInterpValues)] #x values used for interpolation                                                                                    
+    xInterpValues = [xy[0] for i, xy in enumerate(xyTuples) if i < len(yInterpValues)] #x values used for interpolation
     
-    xyInterpValues = [xInterpValues, yInterpValues] #Used to plot in main()
-    return xyInterpValues
+    return [xInterpValues, yInterpValues]
 
-def interpolate(xi,xyInterpPairs): #xyInterpPair is a list of (x, y) pairs. 
+def interpolate(xi,xyInterpPairs): #xyInterpPair is a list of (x,y) pairs. 
     x = [xy[0] for xy in xyInterpPairs] 
     y = [xy[1] for xy in xyInterpPairs]
                          
