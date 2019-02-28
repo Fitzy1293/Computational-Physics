@@ -1,7 +1,7 @@
 """
 Author:  Owen Fitzgerald
 Purpose: Projectile motion calculation and graphing.
-         With air resistance from Euler's method and without air resistance.
+         with and without air resistance.
          Now has lagrange interpolation.
 
 Bugs:    If tau is too small you get an error.
@@ -103,7 +103,7 @@ def interpolateNoAir(xNoAir, yNoAir):
                                                                     #I like working with lists
                                                                     #Can work with the theoretical values
                                                                     #Without worrying about changing original values
-    y0 = yNoAir[0] #For adding to the final list 
+    y0 = yNoAir[0] #For adding to the final list
     
     xyTuples = [] #List of (x, y) pairs
     for i in range(len(xyList[1])):                                 
