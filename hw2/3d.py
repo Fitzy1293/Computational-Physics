@@ -99,31 +99,20 @@ def main():
     plt.show()
 
 def interpolateNoAir(xNoAir, yNoAir):
-    xyList = [deepcopy(xNoAir.tolist()), deepcopy(yNoAir.tolist())] #Deep copy of the numpy arrays
-                                                                    #I like working with lists
-                                                                    #Can work with the theoretical values
-                                                                    #Without worrying about changing original values
+    xyList = [deepcopy(xNoAir.tolist()), deepcopy(yNoAir.tolist())] #Copy of the numpy arrays to work with a list
+                                                                    
     y0 = yNoAir[0] #For adding to the final list
-    
-    xyTuples = [] #List of (x, y) pairs
-    for i in range(len(xyList[1])):                                 
-        if xyList[1][i] > 0: #Getting rid of theoretical y values <= 0
-            xyTuples.append((xyList[0][i], xyList[1][i]))
-    
-    xyInterpPair = [xyTuples[-1], xyTuples[-2], xyTuples[-3]] #Gets three (x,y) points for interpolation
-  
-    xValues = [xy[0] for xy in xyTuples] #List of x values
-                                         
-    yInterpValues = [] #y values for interpolation at each x value
-    for x in xValues: 
-        yInterp = interpolate(x, xyInterpPair)
-        yInterpValues.append(yInterp)
 
-    yInterpValues = [y for y in yInterpValues if y > 0] #Gets rid of new interpolated y values <= 0
-    xInterpValues = [x for i, x in enumerate(xValues) if i < len(yInterpValues)] #Only x values that have an interpolated y                                   
-                                                                                 #Means only x values while y is in the air
+    #List of (x, y) pairs such that y > 0. xyList[0][i] is the x value xyList[0][1] is the y value 
+    xyTuples = [(xyList[0][i], xyList[1][i]) for i in range(len(xyList[1])) if xyList[1][i] > 0]                              
+    
+    xyInterpPair = [xyTuples[-1], xyTuples[-2], xyTuples[-3]] #Gets three (x,y) points for interpolation  
+    yInterpValues = [interpolate(x, xyInterpPair) for x in xyList[0]] #y values for interpolation at each x value
 
-    xInterpValues = [0] + xInterpValues #Adds the starting position because y values = 0 were removed
+    yInterpValues = [y for y in yInterpValues if y > 0] #Keeps interpolated values such that y > 0
+    xInterpValues = [x for i, x in enumerate(xyList[0]) if i < len(yInterpValues)] #Only x values that have an interpolated y                                   
+                                                                                 
+    xInterpValues = [0] + xInterpValues #Adds the starting position because y values = 0 was removed
     yInterpValues = [y0] + yInterpValues
 
     xyInterpValues = [xInterpValues, yInterpValues] #Used to plot in main()
