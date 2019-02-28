@@ -5,6 +5,9 @@ Purpose: Projectile motion calculation and graphing.
          Now has lagrange interpolation.
 
 Bugs:    If tau is too small you get an error.
+
+Notes:   I like using list comprehensions more than np arrays. I don't know why.
+         I modified the program a little since I took the screenshots for the questions.
 """
 
 import numpy as np
@@ -80,11 +83,11 @@ def main():
     xground = np.array([0., xNoAir[laststep-1]])
     yground = np.array([0., 0.])
     
-    xInterpValues = interpolateNoAir(xNoAir, yNoAir)[0] #x and y lists from interpolated theoretical values
-    yInterpValues = interpolateNoAir(xNoAir, yNoAir)[1]
+    xInterpValues = interpolateTheoretical(xNoAir, yNoAir)[0] #x and y lists from interpolated theoretical values
+    yInterpValues = interpolateTheoretical(xNoAir, yNoAir)[1]
 
-    #For 3(c), len(xInterpValues)-1 to not include the starting first index, which is tau * steps
-    print('The interpolated time of flight is '+ str((len(xInterpValues)-1) * tau) + ' seconds') 
+    #For 3(c)
+    print('The interpolated time of flight is '+ str(len(xInterpValues) * tau) + ' seconds') 
     print('The interpolated range is ' + str(xInterpValues[-1]) + ' meters')                                                                                             
     
     plt.plot(xplot[0:laststep+1], yplot[0:laststep+1], '+',
@@ -98,22 +101,17 @@ def main():
     plt.title('Projectile motion')
     plt.show()
 
-def interpolateNoAir(xNoAir, yNoAir):
-    xyList = [deepcopy(xNoAir.tolist()), deepcopy(yNoAir.tolist())] #Copy of the numpy arrays to work with a list
-                                                                    
-    y0 = yNoAir[0] #For adding to the final list
-
-    #List of (x, y) pairs such that y > 0. xyList[0][i] is the x value xyList[0][1] is the y value 
-    xyTuples = [(xyList[0][i], xyList[1][i]) for i in range(len(xyList[1])) if xyList[1][i] > 0]                              
-    
-    xyInterpPair = [xyTuples[-1], xyTuples[-2], xyTuples[-3]] #Gets three (x,y) points for interpolation  
-    yInterpValues = [interpolate(x, xyInterpPair) for x in xyList[0]] #y values for interpolation at each x value
+def interpolateTheoretical(xNoAir, yNoAir):
+    xyTuples = [(xNoAir[i], yNoAir[i]) for i, y in enumerate(yNoAir) if y > 0] #(x,y) such that y > 0
+                                                    
+    xyInterpPairs = [xyTuples[-1], xyTuples[-2], xyTuples[-3]] #Gets three (x,y) points for interpolation  
+    yInterpValues = [interpolate(xy[0], xyInterpPairs) for xy in xyTuples] #y values for interpolation at each x value
 
     yInterpValues = [y for y in yInterpValues if y > 0] #Keeps interpolated values such that y > 0
-    xInterpValues = [x for i, x in enumerate(xyList[0]) if i < len(yInterpValues)] #Only x values that have an interpolated y                                   
+    xInterpValues = [xy[0] for i, xy in enumerate(xyTuples) if i < len(yInterpValues)] #Only x values that have an interpolated y                                   
                                                                                  
     xInterpValues = [0] + xInterpValues #Adds the starting position because y values = 0 was removed
-    yInterpValues = [y0] + yInterpValues
+    yInterpValues = [xyTuples[1][0]] + yInterpValues
 
     xyInterpValues = [xInterpValues, yInterpValues] #Used to plot in main()
     return xyInterpValues
