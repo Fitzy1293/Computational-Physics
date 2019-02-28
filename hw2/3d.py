@@ -6,7 +6,7 @@ Purpose: Projectile motion calculation and plotting.
 
          Homework 2, Computational Physics 
 
-Bugs:    If you give use certain strange values to the height it crashes.
+Bugs:    If you use certain strange values to the height it crashes.
          Tau can't be too small. 
 
 Notes:   I like using list comprehensions more than np arrays. I don't know why.
@@ -112,7 +112,7 @@ def interpolateTheoretical(xNoAir, yNoAir):
 
     xInterpValues = [xy[0] for i, xy in enumerate(xyTuples) if i < len(yInterpValues)] #x values used for interpolation
     
-    return [xInterpValues, yInterpValues]
+    return [xInterpValues, yInterpValues] #For plot in main()
 
 def interpolate(xi,xyInterpPairs): #xyInterpPair is a list of (x,y) pairs. 
     x = [xy[0] for xy in xyInterpPairs] 
