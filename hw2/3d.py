@@ -6,7 +6,7 @@ Purpose: Projectile motion calculation and plotting.
 
          Homework 2, Computational Physics 
 
-Bugs:    If you use certain strange values to the height it crashes.
+Bugs:    If you use certain strange values for the height it crashes.
          Tau can't be too small. 
 
 Notes:   I like using list comprehensions more than np arrays. I don't know why.
