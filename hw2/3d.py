@@ -84,7 +84,8 @@ def main():
     xInterpValues = interpolateNoAir(xNoAir, yNoAir)[0] #x and y lists from interpolated theoretical values
     yInterpValues = interpolateNoAir(xNoAir, yNoAir)[1]
     
-    print('The corrected time of flight is '+ str((len(xInterpValues)-1) * tau) + ' seconds') #For 3(c)
+    print('The interpolated time of flight is '+ str((len(xInterpValues)-1) * tau) + ' seconds') #For 3(c)
+    print('The interpolated range is ' + str(xInterpValues[-1]) + ' meters')
 
     plt.plot(xplot[0:laststep+1], yplot[0:laststep+1], '+',
              xNoAir[0:laststep], yNoAir[0:laststep], '-',
