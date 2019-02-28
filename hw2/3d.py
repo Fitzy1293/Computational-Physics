@@ -42,7 +42,6 @@ def main():
     grav = 9.81    # Gravitational acceleration (m/s^2)
     mass = 0.145   # Mass of projectile (kg)
 
-
     tau = eval(input('Enter timestep, tau (sec): '))   # (sec)
     maxstep = 1000 # Maximum number of steps
     xplot = np.empty(maxstep)
@@ -74,7 +73,7 @@ def main():
             break
 
     print('Maximum range is', r[0], 'meters')
-    print('Time of flight is', laststep*tau , ' seconds') 
+    print('Time of flight is', laststep*tau , ' seconds')
 
     #* Graph the trajectory of the baseball
     # Mark the location of the ground by a straight line
@@ -107,7 +106,7 @@ def interpolateNoAir(xNoAir, yNoAir):
     
     xyTuples = [] #List of (x, y) pairs
     for i in range(len(xyList[1])):                                 
-        if xyList[1][i] > 0: #Getting rid of theoretical y values less > 0
+        if xyList[1][i] > 0: #Getting rid of theoretical y values <= 0
             xyTuples.append((xyList[0][i], xyList[1][i]))
     
     xyInterpPair = [xyTuples[-1], xyTuples[-2], xyTuples[-3]] #Gets three (x,y) points for interpolation
@@ -118,10 +117,12 @@ def interpolateNoAir(xNoAir, yNoAir):
     for x in xValues: 
         yInterp = interpolate(x, xyInterpPair)
         yInterpValues.append(yInterp)
-        
+
+    yInterpValues = [y for y in yInterpValues if y > 0] #Gets rid of new interpolated y values <= 0
     xInterpValues = [x for i, x in enumerate(xValues) if i < len(yInterpValues)] #Only x values that have an interpolated y                                   
                                                                                  #Means only x values while y is in the air
-    xInterpValues = [0] + xInterpValues #Adds the starting position
+
+    xInterpValues = [0] + xInterpValues #Adds the starting position because y values = 0 were removed
     yInterpValues = [y0] + yInterpValues                                                                  
     xyInterpValues = [xInterpValues, yInterpValues] #Used to plot in main()
     return xyInterpValues
