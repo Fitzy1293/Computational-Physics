@@ -12,7 +12,7 @@ Bugs:    If you give use certain strange values to the height it crashes.
 Notes:   I like using list comprehensions more than np arrays. I don't know why.
          I modified the program a little since I took the screenshots for the questions,
          because I ended up obsessing over how best to write the interpolateTheoretical function.
-         If you understand the three list comprehensions in interpolateTheoretical then then
+         If you understand the three list comprehensions in interpolateTheoretical then
          you understand pretty much all of what the interpolation is meant to do. 
 """
 
