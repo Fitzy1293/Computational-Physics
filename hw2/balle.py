@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from pprint import pprint
 import warnings
-
+from copy import deepcopy
 
 def main():
     #* Set initial position and velocity of the baseball
@@ -72,7 +72,6 @@ def main():
             yplot[laststep] = r[1]
             break
 
-    #* Print maximum range and time of flight
     print('Maximum range is', r[0], 'meters')
     print('Time of flight is', laststep*tau , ' seconds')
 
@@ -84,7 +83,6 @@ def main():
     xinterpValues = interpolateNoAir(xNoAir, yNoAir)[0] #x and y lists from interpolateNoAir
     yinterpValues = interpolateNoAir(xNoAir, yNoAir)[1]
 
-    # Plot the computed trajectory and parabolic, no-air curve
     plt.plot(xplot[0:laststep+1], yplot[0:laststep+1], '+',
              xNoAir[0:laststep], yNoAir[0:laststep], '-',
              xinterpValues, yinterpValues,'-', #Added lagrange interpolation to plot
@@ -97,13 +95,14 @@ def main():
     plt.show()
 
 def interpolateNoAir(xNoAir, yNoAir):
-    xyList = [list(xNoAir), list(yNoAir)] #List of x and y values as listspl
-    
-    xyTuples = [] #List of (x, y) pairs
-    for i in range(len(xyList[1])):
-        if xyList[1][i] > 0: #Getting rid of y values less >=, because the ball won't go through the ground 
+    xyList = [deepcopy(xNoAir.tolist()), deepcopy(yNoAir.tolist())] #Deep copy of the numpy arrays
+                                                                    #I like working with lists
+                                                                    #Can work with the theoretical values
+    xyTuples = [] #List of (x, y) pairs                             #Without worrying about changing original values
+    for i in range(len(xyList[1])):                                 
+        if xyList[1][i] > 0: #Getting rid of theoretical y values less > 0
             xyTuples.append((xyList[0][i], xyList[1][i]))
-    
+    print(xyList)
     xyInterpPair = [xyTuples[-1], xyTuples[-2], xyTuples[-3]] #Gets three (x,y) points for interpolation
         
     xValues = [xy[0] for xy in xyTuples] #List of x values
@@ -114,23 +113,21 @@ def interpolateNoAir(xNoAir, yNoAir):
         yInterpValues.append(yInterp)
         
     xInterpValues = [x for i, x in enumerate(xValues) if i < len(yInterpValues)] #Only x values that have an interpolated y                                   
-                                                                                 #Means only x values while y is in the air
-                                                                                 
+                                                                                 #Means only x values while y is in the air                                                               
     xyInterpValues = [xInterpValues, yInterpValues] #Used to plot in main()
     return xyInterpValues
 
-def interpolate(xi,xyInterpPairs): #xyInterpPair is a numpy array of (x, y) pairs. 
+def interpolate(xi,xyInterpPairs): #xyInterpPair is a LIST of (x, y) pairs. 
     x = [xy[0] for xy in xyInterpPairs] #x and y values in separate lists from the tuple
     y = [xy[1] for xy in xyInterpPairs]
 
-    warnings.simplefilter('error') #Treating warnings as exceptions
-    try:                           #Numbers were to small to hanlde
+    try:                           
         yi = ( (xi-x[1])*(xi-x[2])/((x[0]-x[1])*(x[0]-x[2])) * y[0]
         + (xi-x[0])*(xi-x[2])/((x[1]-x[0])*(x[1]-x[2])) * y[1]
         + (xi-x[0])*(xi-x[1])/((x[2]-x[0])*(x[2]-x[1])) * y[2])
         return yi
 
-    except RuntimeWarning:
+    except ZeroDivisionError:
         return 0
 
 main()
