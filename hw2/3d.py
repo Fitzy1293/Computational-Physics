@@ -83,7 +83,7 @@ def main():
     xInterpValues = interpolateNoAir(xNoAir, yNoAir)[0] #x and y lists from interpolated theoretical values
     yInterpValues = interpolateNoAir(xNoAir, yNoAir)[1]
 
-    #For 3(c), len(xInterpValues)-1 to not include the starting time element, which is tau * steps
+    #For 3(c), len(xInterpValues)-1 to not include the starting first index, which is tau * steps
     print('The interpolated time of flight is '+ str((len(xInterpValues)-1) * tau) + ' seconds') 
     print('The interpolated range is ' + str(xInterpValues[-1]) + ' meters')                                                                                             
     
