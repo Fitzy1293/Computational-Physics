@@ -14,7 +14,6 @@ Notes:   I like using list comprehensions more than np arrays. I don't know why.
 import numpy as np
 import matplotlib.pyplot as plt
 from pprint import pprint
-from copy import deepcopy
 
 def main():
     #* Set initial position and velocity of the baseball
