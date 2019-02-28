@@ -6,13 +6,14 @@ Purpose: Projectile motion calculation and plotting.
 
          Homework 2, Computational Physics 
 
-Bugs:    If you use certain strange values for the height it crashes.
+Bugs:    If you give use certain strange values to the height it crashes.
          Tau can't be too small. 
 
 Notes:   I like using list comprehensions more than np arrays. I don't know why.
          I modified the program a little since I took the screenshots for the questions,
          because I ended up obsessing over how best to write the interpolateTheoretical function.
-         It is pretty concise now and I'm happy with it. 
+         If you understand the three list comprehensions in interpolateTheoretical then then
+         you understand pretty much all of what the interpolation is meant to do. 
 """
 
 import numpy as np
@@ -75,7 +76,7 @@ def main():
         #* If ball reaches ground (y<0), break out of the loop
         if r[1] < 0 : 
             laststep = istep+1
-            xplot[laststep] = r[0]  # Record last values computed
+            xplot[laststep] = r[0]  
             yplot[laststep] = r[1]
             break
 
@@ -108,11 +109,10 @@ def main():
 def interpolateTheoretical(xNoAir, yNoAir):
     xyTuples = [(xNoAir[i], yNoAir[i]) for i, y in enumerate(yNoAir) if y > 0 and i != 0] #(x,y), y > 0 except the start
 
-    yInterpValues = [interpolate(xy[0], xyTuples[-3:]) for xy in xyTuples] #Interpolates y from theoretical (x,y)
-
-    xInterpValues = [xy[0] for i, xy in enumerate(xyTuples) if i < len(yInterpValues)] #x values used for interpolation
+    yInterpValues = [interpolate(xy[0], xyTuples[-3:]) for xy in xyTuples] #Interpolation from last 3 theoretical (x,y)
+    xInterpValues = [xy[0] for i, xy in enumerate(xyTuples) if i < len(yInterpValues)] #Only x values used for interpolation
     
-    return [xInterpValues, yInterpValues] #For plot in main()
+    return [xInterpValues, yInterpValues]
 
 def interpolate(xi,xyInterpPairs): #xyInterpPair is a list of (x,y) pairs. 
     x = [xy[0] for xy in xyInterpPairs] 
