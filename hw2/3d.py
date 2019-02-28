@@ -7,7 +7,8 @@ Purpose: Projectile motion calculation and graphing.
 Bugs:    If tau is too small you get an error.
 
 Notes:   I like using list comprehensions more than np arrays. I don't know why.
-         I modified the program a little since I took the screenshots for the questions.
+         I modified the program a little since I took the screenshots for the questions,
+         because I ended up obsessing over how best to write the interpolateTheoretical function.
 """
 
 import numpy as np
@@ -102,31 +103,24 @@ def main():
     plt.show()
 
 def interpolateTheoretical(xNoAir, yNoAir):
-    xyTuples = [(xNoAir[i], yNoAir[i]) for i, y in enumerate(yNoAir) if y > 0] #(x,y) such that y > 0
-                                                    
+    xyTuples = [(xNoAir[i], yNoAir[i]) for i, y in enumerate(yNoAir) if y > 0 and i!= 0] #(x,y) y > 0, except the start
+
     xyInterpPairs = [xyTuples[-1], xyTuples[-2], xyTuples[-3]] #Gets three (x,y) points for interpolation  
-    yInterpValues = [interpolate(xy[0], xyInterpPairs) for xy in xyTuples] #y values for interpolation at each x value
 
-    yInterpValues = [y for y in yInterpValues if y > 0] #Keeps interpolated values such that y > 0
-    xInterpValues = [xy[0] for i, xy in enumerate(xyTuples) if i < len(yInterpValues)] #Only x values that have an interpolated y                                   
-                                                                                 
-    xInterpValues = [0] + xInterpValues #Adds the starting position because y values = 0 was removed
-    yInterpValues = [xyTuples[1][0]] + yInterpValues
+    yInterpValues = [interpolate(xy[0], xyInterpPairs) for xy in xyTuples] #y values for each x
 
+    xInterpValues = [xy[0] for i, xy in enumerate(xyTuples) if i < len(yInterpValues)] #x values used for interpolation                                                                                    
+    
     xyInterpValues = [xInterpValues, yInterpValues] #Used to plot in main()
     return xyInterpValues
 
 def interpolate(xi,xyInterpPairs): #xyInterpPair is a list of (x, y) pairs. 
-    x = [xy[0] for xy in xyInterpPairs] #x and y values in separate lists from the tuple
+    x = [xy[0] for xy in xyInterpPairs] 
     y = [xy[1] for xy in xyInterpPairs]
-
-    try:                           
-        yi = ( (xi-x[1])*(xi-x[2])/((x[0]-x[1])*(x[0]-x[2])) * y[0]
-        + (xi-x[0])*(xi-x[2])/((x[1]-x[0])*(x[1]-x[2])) * y[1]
-        + (xi-x[0])*(xi-x[1])/((x[2]-x[0])*(x[2]-x[1])) * y[2])
-        return yi
-
-    except ZeroDivisionError:
-        return 0
+                         
+    yi = ( (xi-x[1])*(xi-x[2])/((x[0]-x[1])*(x[0]-x[2])) * y[0]
+    + (xi-x[0])*(xi-x[2])/((x[1]-x[0])*(x[1]-x[2])) * y[1]
+    + (xi-x[0])*(xi-x[1])/((x[2]-x[0])*(x[2]-x[1])) * y[2])
+    return yi
 
 main()
