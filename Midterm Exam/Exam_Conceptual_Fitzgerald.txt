@@ -1,0 +1,8 @@
+Yes these plots are what I would expect. 
+I used a starting height of 0 meters, starting speed of 100 m/s and an angle of 30 degrees as the inputs.
+Air resistance x,y components of velocity are decaying exponentials, which is to be expected with air resistance.
+Without air resistance, the x component of velocity is constant, a straight line. 
+Without air resistance, the y component of velocity is constantly decreasing, because it's accelerating downward with gravity.
+
+The final speeds were also significantly different, with air resistance's speed being ~31 m/s, and without being around ~88 m/s.
+This is to be expected, the air resistance should be slower at the end. This what air resistance does, it slows things down. 
