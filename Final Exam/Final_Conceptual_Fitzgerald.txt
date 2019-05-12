@@ -14,4 +14,14 @@ Which means there should not be a theta greater than the original theta, i.e its
 And the amplitude does change using the Euler method, but not with the Verlet method. 
 This means the Verlet Method is a better model for simple harmonic motion. 
 
+2(a) 
+Data science is concerned with the study of data. 
+This includes gathering it , analyzing it, and interpreting it.
+
+2(b) 
+Machine learning is a process in which data is put into a computer that has instructions on what to look for.
+Different than normal computer processes, the computer is taught what to look for not how to do it.
+This "trains" the computer, so that it can assess not only the data it was taught with, but novel data too.  
+This makes algorithmically diffcult tasks like facial recognition easier. 
+
 
