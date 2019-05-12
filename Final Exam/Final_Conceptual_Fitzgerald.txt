@@ -1,5 +1,17 @@
+Conceptual questions.
+
+1(a) 
 This program has the user pick a numerical method to model simple harmonic motion.
 First it asks for which numerical method to use (Euler or Verlet), the initial angle, the time step, and number of steps. 
 It then loops through the number of steps to calculate position, velocity, and period for each step using the chosen numerical method. 
 After the loop it calculates the uncertainty in the period.
 Finally it plots theta with respect to time. 
+
+1(c)
+The Verlet method is a better numerical method for simple harmonic motion. 
+Simple harmonic motion should alternate between the inital position and the negative initial position. 
+Which means there should not be a theta greater than the original theta, i.e its amplitude shouldn't change. 
+And the amplitude does change using the Euler method, but not with the Verlet method. 
+This means the Verlet Method is a better model for simple harmonic motion. 
+
+
