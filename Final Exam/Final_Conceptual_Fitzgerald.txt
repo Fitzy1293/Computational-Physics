@@ -24,4 +24,16 @@ Different than normal computer processes, the computer is taught what to look fo
 This "trains" the computer, so that it can assess not only the data it was taught with, but novel data too.  
 This makes algorithmically diffcult tasks like facial recognition easier. 
 
+2(c)
+Data science and machine learning are important for ananalyzing the large amount of data we now collect. 
+Most problems where the data is almost always different (images, faces, strange credit card purchases) have many dependent variables.
+There is too much much data, so writing an algorithm for these problems is difficult. 
+But machine learning is much faster, and more accurate for these large data type problems.
 
+2(d)
+Machine learning can be used to estimate the condition of vegitation in a region. It looks for light reflected off of chlorophyll.
+But the machine has to be taught to looks for only plants, not just random green objects. 
+https://www.kdnuggets.com/2018/12/deep-learning-satellite-imagery.html
+
+You can use machine learning to differentiate between what is a galaxy, what's a planet, and other astronomical objects. 
+https://www.physcos.physik.lmu.de/research/machinelearning/index.html
