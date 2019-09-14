@@ -1,0 +1,218 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Journal Article
+% LaTeX Template
+% Version 1.4 (15/5/16)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com) with extensive modifications by
+% Vel (vel@LaTeXTemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[twoside,twocolumn]{article}
+
+\usepackage{blindtext} % Package to generate dummy text throughout this template 
+
+\usepackage[sc]{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\linespread{1.05} % Line spacing - Palatino needs more space between lines
+\usepackage{microtype} % Slightly tweak font spacing for aesthetics
+
+\usepackage[english]{babel} % Language hyphenation and typographical rules
+
+\usepackage[hmarginratio=1:1,top=32mm,columnsep=20pt]{geometry} % Document margins
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+
+\usepackage{lettrine} % The lettrine is the first enlarged letter at the beginning of the text
+
+\usepackage{enumitem} % Customized lists
+\setlist[itemize]{noitemsep} % Make itemize lists more compact
+
+\usepackage{verbatim} % To write a command as an example of what to write without the command being executed. 
+
+\usepackage{graphicx} % To include images
+
+\usepackage{abstract} % Allows abstract customization
+\renewcommand{\abstractnamefont}{\normalfont\bfseries} % Set the "Abstract" text to bold
+\renewcommand{\abstracttextfont}{\normalfont\small\itshape} % Set the abstract itself to small italic text
+
+\usepackage{titlesec} % Allows customization of titles
+\renewcommand\thesection{\Roman{section}} % Roman numerals for the sections
+\renewcommand\thesubsection{\roman{subsection}} % roman numerals for subsections
+\titleformat{\section}[block]{\large\scshape\centering}{\thesection.}{1em}{} % Change the look of the section titles
+\titleformat{\subsection}[block]{\large}{\thesubsection.}{1em}{} % Change the look of the section titles
+
+\usepackage{fancyhdr} % Headers and footers
+\pagestyle{fancy} % All pages have headers and footers
+\fancyhead{} % Blank out the default header
+\fancyfoot{} % Blank out the default footer
+\fancyhead[C]{STUDENT NAME $\bullet$ Fall 2019 $\bullet$ Lab 1} % Custom header text
+\fancyfoot[RO,LE]{\thepage} % Custom footer text
+
+\usepackage{titling} % Customizing the title section
+
+\usepackage{hyperref} % For hyperlinks in the PDF
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\setlength{\droptitle}{-4\baselineskip} % Move the title up
+
+\pretitle{\begin{center}\Huge\bfseries} % Article title formatting
+\posttitle{\end{center}} % Article title closing formatting
+\title{Article Title} % Article title
+\author{%
+\textsc{Your Name}\\ %\thanks{A thank you or further information} \\[1ex] % Your name
+\normalsize MCLA \\ % Your institution
+%\normalsize \href{mailto:john@smith.com}{john@smith.com} % Your email address
+%\and % Uncomment if 2 authors are required, duplicate these 4 lines if more
+%\textsc{Jane Smith}\thanks{Corresponding author} \\[1ex] % Second author's name
+%\normalsize University of Utah \\ % Second author's institution
+%\normalsize \href{mailto:jane@smith.com}{jane@smith.com} % Second author's email address
+}
+\date{\today} % Leave empty to omit a date
+\renewcommand{\maketitlehookd}{%
+\begin{abstract}
+\noindent Type your abstract here. The \textbackslash blindtext command pulls up dummy text in this template to show you what the article will look like. 
+\blindtext % Dummy abstract text - replace \blindtext with your abstract text
+\end{abstract}
+}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+% Print the title
+\maketitle
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+
+\section{Introduction}
+
+\lettrine[nindent=0em,lines=3]{P} ut your introduction here. You can change the height of the first letter by changing the number of lines it spans. It is currently set to three.
+
+
+%\blindtext % Dummy text
+
+%------------------------------------------------
+
+\section{Methods}
+
+Explain the set up you used and how you took data here. The command below let's you make a bulleted list. 
+
+\begin{itemize}
+\item Donec dolor arcu, rutrum id molestie in, viverra sed diam
+\item Curabitur feugiat
+\item turpis sed auctor facilisis
+\item arcu eros accumsan lorem, at posuere mi diam sit amet tortor
+\item Fusce fermentum, mi sit amet euismod rutrum
+\item sem lorem molestie diam, iaculis aliquet sapien tortor non nisi
+\item Pellentesque bibendum pretium aliquet
+\end{itemize}
+If you type immediately after the list, there is no indent.
+
+You need to hit \texttt{enter} twice in order to start a new, indented paragraph. If you only hit \texttt{enter} once, the text will still be part of the previous paragraph.
+
+If you have text requiring further explanation, use a footnote\footnote{Example footnote}.
+
+%------------------------------------------------
+
+\section{Results}
+
+If you plan to display data in a table, you need to indicate the number of columns and then each column will be separated by an \texttt{\&}. 
+
+\begin{table}
+\caption{Example table}
+\centering
+\begin{tabular}{llr}
+\toprule
+First name & Last Name & Grade \\
+\midrule
+John & Doe & $7.5$ \\
+Richard & Miles & $2$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+There are many different ways to write equations and mathematical symbols. Any time you are writing an equation in an article, it needs to be on its own line. The following math mode command will do that.
+\begin{equation}
+\label{eq:kin} %For use when you want to reference an equation int eh body of your text.
+y(t) = y_0 + v_0 t + \frac{1}{2}a t^2
+\end{equation}
+You need to define every single symbol used in an equation. To do in-line symbols, use the \texttt{\$\$} math mode. For example, typing \verb|$y_0$| will display $y_0$, the starting position.
+
+Note that the equation is numbered. If you want to reference that equation later on, you need to name it in the \verb|\label{}| part of the equation command and then you can cite it anywhere by typing \verb|(\ref{eq:kin})|, where \verb|eq:kin| would be whatever you've named the equation. When used, it looks like this. ``As can be seen in Equation (\ref{eq:kin}), when the object starts from rest, the equation reduces to a simpler form.''
+
+
+%------------------------------------------------
+
+\section{Discussion}
+Here is where you discuss the results you obtain from analyzing your data. If you want to include an image, like a graph you have made, the file name for the image can not have any spaces and must be in the same folder as the \texttt{.tex} file for your article. There are more involved ways to include an image, like keeping all your images in a separate file and then calling the image from that file. But for this article, use the simple method I use below. 
+
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=7cm]{PracTriangle}
+\caption{Describe the image you include here.}
+\label{triag}
+\end{center}
+\end{figure}
+
+Similar to the equations, you can reference an image with \verb|\ref{}|. Here, I would call \verb|\ref{triag}| to reference Figure \ref{triag}. You can use \texttt{.pdf}, \texttt{.peg}, and \texttt{.png} files 
+
+\subsection{Subsection One}
+You can break any section into different subsections to address different points. 
+
+A sample statement that requires citation \cite{Figueredo:2009dg}.
+
+\blindtext % Dummy text
+
+\subsection{Subsection Two}
+
+\blindtext % Dummy text
+
+\section{Citations and References}
+
+If you are interested in learning how to use a LaTex embedded citation method, you are free to do so. There are many different ways to cite within the body of a text. The ``Reference'' section below is a very simple example that would be very effect for this article. Look at line 180 to see an example of what that citation looks like in the body of the text. If you hover over the citation number in the compiled PDF, it gives the citation information. If you will be writing many articles that use the same citations, you would want to use a package like BibTex that keeps a running list of citation entries that you can call up without having to type it in every time. For this article, the method below would be enough.
+
+Or you can write a numbered list of the articles you are citing in this subsection, and then in the body of the article you can manual cite each individual article by typing the number of the citation in the appropriate sentences. For example: ``Although the possibility of singlet exciton fission and triplet exciton fusion was recognized early on [7-9], the fundamental physical mechanism for singlet-triplet conversion has only recently attracted attention [10-32], also prompted by the interest in its potential application to solar energy harvesting [20].'' Note that if you hover over the citation numbers, you get nothing.
+
+This is how you make a numbered list:
+
+\begin{enumerate}
+\item First article citation
+\item Second article citation
+\end{enumerate}
+
+
+%----------------------------------------------------------------------------------------
+%	REFERENCE LIST
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+
+\bibitem[1]{Figueredo:2009dg}
+Figueredo, A.~J. and Wolf, P. S.~A. (2009).
+\newblock Assortative pairing and life history strategy - a cross-cultural
+  study.
+\newblock {\em Human Nature}, 20:317--330. %The \em command makes the text italic
+ 
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
